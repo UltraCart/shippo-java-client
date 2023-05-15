@@ -1,24 +1,14 @@
 package com.shippo.model;
 
-import static org.junit.Assert.*;
+import com.shippo.Shippo;
+import com.shippo.exception.*;
+import org.junit.Test;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TimeZone;
+import java.util.*;
 
-import org.junit.Test;
-
-import com.shippo.Shippo;
-import com.shippo.exception.APIConnectionException;
-import com.shippo.exception.APIException;
-import com.shippo.exception.AuthenticationException;
-import com.shippo.exception.InvalidRequestException;
-import com.shippo.exception.ShippoException;
+import static org.junit.Assert.*;
 
 public class ShipmentTest extends ShippoTest {
 
@@ -27,7 +17,7 @@ public class ShipmentTest extends ShippoTest {
             APIException {
         Shipment testObject = createShipmentFixture();
         assertEquals("SUCCESS", testObject.getStatus());
-        assertEquals(Shippo.apiKeyIsTest, testObject.isTest());
+        assertEquals(Shippo.apiKeyIsTest.get(), testObject.isTest());
         Address addressTo = (Address) testObject.getAddressTo();
         assertTrue(addressTo.getIsComplete());
     }

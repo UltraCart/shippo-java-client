@@ -1,20 +1,18 @@
 package com.shippo.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeoutException;
-
 import com.shippo.Shippo;
 import com.shippo.exception.APIConnectionException;
 import com.shippo.exception.APIException;
 import com.shippo.exception.AuthenticationException;
 import com.shippo.exception.InvalidRequestException;
 import com.shippo.model.Batch.BatchStatus;
-
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeoutException;
+
+import static org.junit.Assert.assertEquals;
 
 public class BatchTest extends ShippoTest {
 
@@ -25,7 +23,7 @@ public class BatchTest extends ShippoTest {
 		Batch batch = createBatchFixture();
 
 		// EXPECT
-		assertEquals(Shippo.apiKeyIsTest, batch.isTest());
+		assertEquals(Shippo.apiKeyIsTest.get(), batch.isTest());
 
 		// WHEN
 		String batchId = batch.getId();

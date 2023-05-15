@@ -12,8 +12,11 @@ public abstract class Shippo {
     public static int httpConnectTimeout = 30000; // milliseconds
     public static int httpReadTimeout = 80000; // milliseconds
 
-    public static volatile String apiKey;
-    public static boolean apiKeyIsTest;
+    public static final ThreadLocal<String> apiKey = new ThreadLocal<>();
+    public static final ThreadLocal<Boolean> apiKeyIsTest = new ThreadLocal<>();
+
+//    public static volatile String apiKey; // replaced with ThreadLocal variable
+//    public static boolean apiKeyIsTest; // replaced with ThreadLocal variable
     public static volatile String apiVersion;
 
     private static volatile boolean verifySSL = true;
@@ -51,12 +54,28 @@ public abstract class Shippo {
         DEBUG = dEBUG;
     }
 
-    public static String getApiKey() {
-        return apiKey;
+//    public static String getApiKey() {
+//        return apiKey;
+//    }
+//
+//    public static void setApiKey(String apiKey) {
+//        Shippo.apiKey = apiKey;
+//    }
+
+    public static boolean isTestApiKey(){
+        return apiKeyIsTest.get();
     }
 
-    public static void setApiKey(String apiKey) {
-        Shippo.apiKey = apiKey;
+    public static void setTestApiKey(boolean isTest){
+        apiKeyIsTest.set(isTest);
+    }
+
+    public static String getApiKey() {
+      return apiKey.get();
+    }
+
+    public static void setApiKey(String key) {
+      apiKey.set(key);
     }
 
     public static String getApiVersion() {

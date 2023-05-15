@@ -1,19 +1,14 @@
 package com.shippo.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import com.shippo.Shippo;
+import com.shippo.exception.*;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.shippo.Shippo;
-import com.shippo.exception.APIConnectionException;
-import com.shippo.exception.APIException;
-import com.shippo.exception.AuthenticationException;
-import com.shippo.exception.InvalidRequestException;
-import com.shippo.exception.ShippoException;
-
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class ParcelTest extends ShippoTest {
 
@@ -21,7 +16,7 @@ public class ParcelTest extends ShippoTest {
     public void testValidCreate() {
         Parcel testObject = createParcelFixture();
         assertEquals("VALID", testObject.getObjectState());
-        assertEquals(Shippo.apiKeyIsTest, testObject.isTest());
+        assertEquals(Shippo.apiKeyIsTest.get(), testObject.isTest());
     }
 
     @Test(expected = InvalidRequestException.class)

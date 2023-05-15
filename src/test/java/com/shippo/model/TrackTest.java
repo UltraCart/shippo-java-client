@@ -1,15 +1,10 @@
 package com.shippo.model;
 
-import static org.junit.Assert.assertEquals;
-
 import com.shippo.Shippo;
-import com.shippo.exception.APIConnectionException;
-import com.shippo.exception.APIException;
-import com.shippo.exception.AuthenticationException;
-import com.shippo.exception.InvalidRequestException;
-import com.shippo.exception.ShippoException;
-
+import com.shippo.exception.*;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class TrackTest extends ShippoTest {
 
@@ -24,7 +19,7 @@ public class TrackTest extends ShippoTest {
         Track track = Track.getTrackingInfo(testModeCarrier, testModeNumber, null);
 
         // EXPECT
-        assertEquals(Shippo.apiKeyIsTest, track.isTest());
+        assertEquals(Shippo.apiKeyIsTest.get(), track.isTest());
         assertEquals(track.getCarrier(), testModeCarrier);
         assertEquals(track.getTrackingNumber(), testModeNumber);
         assertEquals(track.getTrackingStatus().getStatus(), Track.TrackingStatus.DELIVERED);

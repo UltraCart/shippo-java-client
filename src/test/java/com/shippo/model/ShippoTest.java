@@ -1,21 +1,20 @@
 package com.shippo.model;
 
+import com.shippo.Shippo;
+import org.junit.Before;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
-import com.shippo.Shippo;
-
-import org.junit.Before;
-
 public class ShippoTest {
 	@Before
 	public void setAPIKey() {
-		Shippo.apiKey = "shippo_test_cf1b6d0655e59fc6316880580765066038ef20d8";
+		Shippo.apiKey.set("shippo_test_cf1b6d0655e59fc6316880580765066038ef20d8");
 		// Some tests make assertions on response models based on whether a test api key
 		// is used
-		Shippo.apiKeyIsTest = true;
+		Shippo.apiKeyIsTest.set(true);
 		Shippo.DEBUG = true;
 	}
 
@@ -43,6 +42,6 @@ public class ShippoTest {
 			public boolean test(Rate rate) {
 				return rate.isTest();
 			}
-		}).findAny().orElseThrow();
+		}).findAny().orElseThrow(() -> new RuntimeException("Did not find test rate."));
 	}
 }

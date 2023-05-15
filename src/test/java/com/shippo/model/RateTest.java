@@ -1,18 +1,17 @@
 package com.shippo.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import com.shippo.Shippo;
 import com.shippo.exception.APIConnectionException;
 import com.shippo.exception.APIException;
 import com.shippo.exception.AuthenticationException;
 import com.shippo.exception.InvalidRequestException;
-
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class RateTest extends ShippoTest {
 
@@ -21,7 +20,7 @@ public class RateTest extends ShippoTest {
         RateCollection testObject = createRateCollectionFixture();
         assertNotNull(testObject.getData());
         for (Rate rate : testObject.getData()) {
-            assertEquals(Shippo.apiKeyIsTest, rate.isTest());
+            assertEquals(Shippo.apiKeyIsTest.get(), rate.isTest());
         }
     }
 

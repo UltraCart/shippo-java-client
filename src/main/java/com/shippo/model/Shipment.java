@@ -1,16 +1,12 @@
 package com.shippo.model;
 
+import com.shippo.Shippo;
+import com.shippo.exception.*;
+import com.shippo.net.APIResource;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.shippo.Shippo;
-import com.shippo.exception.APIConnectionException;
-import com.shippo.exception.APIException;
-import com.shippo.exception.AuthenticationException;
-import com.shippo.exception.InvalidRequestException;
-import com.shippo.exception.RequestTimeoutException;
-import com.shippo.net.APIResource;
 
 public class Shipment extends APIResource {
 
@@ -87,7 +83,7 @@ public class Shipment extends APIResource {
 				throw new RequestTimeoutException(
 						"A timeout has occured while waiting for your rates to generate. Try retreiving the Shipment object again and check if status is updated. If this issue persists, please contact support@goshippo.com");
 			}
-			shipment = retrieve(object_id);
+			shipment = retrieve(object_id, apiKey);
 			status = (String) shipment.status;
 		}
 

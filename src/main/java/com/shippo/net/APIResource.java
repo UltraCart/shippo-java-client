@@ -1,5 +1,14 @@
 package com.shippo.net;
 
+import com.google.gson.Gson;
+import com.shippo.Shippo;
+import com.shippo.exception.APIConnectionException;
+import com.shippo.exception.APIException;
+import com.shippo.exception.AuthenticationException;
+import com.shippo.exception.InvalidRequestException;
+import com.shippo.serialization.GsonFactory;
+import com.shippo.serialization.ShippoObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,20 +22,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-
-import com.google.gson.Gson;
-import com.shippo.Shippo;
-import com.shippo.exception.APIConnectionException;
-import com.shippo.exception.APIException;
-import com.shippo.exception.AuthenticationException;
-import com.shippo.exception.InvalidRequestException;
-import com.shippo.serialization.GsonFactory;
-import com.shippo.serialization.ShippoObject;
+import java.util.*;
 
 public abstract class APIResource extends ShippoObject {
 
@@ -113,7 +109,7 @@ public abstract class APIResource extends ShippoObject {
 				String.format("Shippo/v1 JavaBindings/%s", Shippo.VERSION));
 
 		if (apiKey == null) {
-			apiKey = Shippo.apiKey;
+			apiKey = Shippo.apiKey.get();
 		}
 
 		headers.put("Authorization", String.format("ShippoToken %s", apiKey));
@@ -480,7 +476,7 @@ public abstract class APIResource extends ShippoObject {
 			String url, Map<String, Object> params, Class<T> clazz,
 			String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, APIException {
-		if ((Shippo.apiKey == null || Shippo.apiKey.length() == 0)
+		if ((Shippo.apiKey == null || Shippo.apiKey.get().length() == 0)
 				&& (apiKey == null || apiKey.length() == 0)) {
 			throw new AuthenticationException(
 					"No API key provided. (HINT: set your API key using 'Shippo.apiKey = <API-KEY>'. "
@@ -489,7 +485,7 @@ public abstract class APIResource extends ShippoObject {
 		}
 
 		if (apiKey == null) {
-			apiKey = Shippo.apiKey;
+			apiKey = Shippo.apiKey.get();
 		}
 
 		String query;

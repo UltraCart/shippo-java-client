@@ -1,11 +1,10 @@
 package com.shippo.model;
 
-import static org.junit.Assert.assertEquals;
-
 import com.shippo.Shippo;
 import com.shippo.exception.ShippoException;
-
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class CarrierAccountTest extends ShippoTest {
 
@@ -15,7 +14,7 @@ public class CarrierAccountTest extends ShippoTest {
         CarrierAccount usps_account = CarrierAccount.getByCarrier("usps");
 
         // EXPECT
-        assertEquals(Shippo.apiKeyIsTest, usps_account.isTest());
+        assertEquals(Shippo.apiKeyIsTest.get(), usps_account.isTest());
     }
 
     // TODO: throw a better exception

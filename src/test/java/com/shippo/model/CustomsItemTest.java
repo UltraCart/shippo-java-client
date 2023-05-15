@@ -1,18 +1,14 @@
 package com.shippo.model;
 
-import static org.junit.Assert.*;
+import com.shippo.Shippo;
+import com.shippo.exception.*;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
-
-import com.shippo.Shippo;
-import com.shippo.exception.APIConnectionException;
-import com.shippo.exception.APIException;
-import com.shippo.exception.AuthenticationException;
-import com.shippo.exception.InvalidRequestException;
-import com.shippo.exception.ShippoException;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class CustomsItemTest extends ShippoTest {
 
@@ -36,7 +32,7 @@ public class CustomsItemTest extends ShippoTest {
     @Test
     public void testValidCreate() {
         CustomsItem testObject = createCustomsItemFixture();
-        assertEquals(Shippo.apiKeyIsTest, testObject.isTest());
+        assertEquals(Shippo.apiKeyIsTest.get(), testObject.isTest());
         assertEquals(testObject.getObjectState(), "VALID");
         assertEquals(testObject.getDescription(), objectMap.get("description"));
         assertEquals(testObject.getQuantity(), Double.parseDouble((String) objectMap.get("quantity")));

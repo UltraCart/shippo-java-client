@@ -1,18 +1,13 @@
 package com.shippo.model;
 
-import static org.junit.Assert.*;
+import com.shippo.Shippo;
+import com.shippo.exception.*;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
-
-import com.shippo.Shippo;
-import com.shippo.exception.APIConnectionException;
-import com.shippo.exception.APIException;
-import com.shippo.exception.AuthenticationException;
-import com.shippo.exception.InvalidRequestException;
-import com.shippo.exception.ShippoException;
+import static org.junit.Assert.*;
 
 public class CustomsDeclarationTest extends ShippoTest {
 
@@ -64,7 +59,7 @@ public class CustomsDeclarationTest extends ShippoTest {
         Shippo.setDEBUG(true);
         CustomsDeclaration testObject = createCustomsDeclarationFixture();
         assertEquals(testObject.getObjectState(), "VALID");
-        assertEquals(Shippo.apiKeyIsTest, testObject.isTest());
+        assertEquals(Shippo.apiKeyIsTest.get(), testObject.isTest());
 
         assertEquals(testObject.getCertifySigner(), customsDeclarationRequestMap.get("certify_signer"));
         assertEquals(testObject.getCertify(),

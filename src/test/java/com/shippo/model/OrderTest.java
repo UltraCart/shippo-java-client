@@ -1,7 +1,8 @@
 package com.shippo.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import com.shippo.Shippo;
+import com.shippo.exception.*;
+import org.junit.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,14 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.shippo.Shippo;
-import com.shippo.exception.APIConnectionException;
-import com.shippo.exception.APIException;
-import com.shippo.exception.AuthenticationException;
-import com.shippo.exception.InvalidRequestException;
-import com.shippo.exception.ShippoException;
-
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class OrderTest extends ShippoTest {
 
@@ -24,7 +19,7 @@ public class OrderTest extends ShippoTest {
 	public void testValidCreate() {
 		Order testObject = createOrderFixture();
 		assertEquals("PAID", testObject.getOrderStatus().toString());
-		assertEquals(Shippo.apiKeyIsTest, testObject.isTest());
+		assertEquals(Shippo.apiKeyIsTest.get(), testObject.isTest());
 	}
 
 	@Test(expected = InvalidRequestException.class)

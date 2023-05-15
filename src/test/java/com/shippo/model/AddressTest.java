@@ -1,18 +1,13 @@
 package com.shippo.model;
 
-import static org.junit.Assert.*;
+import com.shippo.Shippo;
+import com.shippo.exception.*;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
-
-import com.shippo.Shippo;
-import com.shippo.exception.APIConnectionException;
-import com.shippo.exception.APIException;
-import com.shippo.exception.AuthenticationException;
-import com.shippo.exception.InvalidRequestException;
-import com.shippo.exception.ShippoException;
+import static org.junit.Assert.*;
 
 public class AddressTest extends ShippoTest {
 
@@ -20,7 +15,7 @@ public class AddressTest extends ShippoTest {
     public void testValidCreate() {
         Address address = createAddressFixture1();
         assertTrue(address.getIsComplete());
-        assertEquals(Shippo.apiKeyIsTest, address.isTest());
+        assertEquals(Shippo.apiKeyIsTest.get(), address.isTest());
     }
 
     @Test(expected = InvalidRequestException.class)
